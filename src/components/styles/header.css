@@ -1,0 +1,19 @@
+.header {
+    background-color: #37b2bb;;
+    padding: 30px 40px;
+    color: white;
+    text-align: center;
+}
+
+#main-input {
+    width: 40vw;
+}
+
+.todo {
+    text-align: center;
+    padding: 5px;
+}
+input {
+    background-color: white;
+    border: none;
+}

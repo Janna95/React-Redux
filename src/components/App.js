@@ -35,7 +35,7 @@ class App extends Component {
   }
 
   edit = (data, id) => {
-    console.log("edit works in App", data, id)
+    //console.log("edit works in App", data, id)
     let options = {
       method: 'PUT',
       body: JSON.stringify({input: data}),
@@ -47,7 +47,7 @@ class App extends Component {
     fetch('/api/todo/' + id, options)
     .then(res => res.json())
     .then(response => {
-        console.log('Success from PUT/edit function:', response)
+        //console.log('Success from PUT/edit function:', response)
         this.setState({todos: response })
     })
     .catch(error => console.error('Error:', error));
@@ -66,7 +66,7 @@ class App extends Component {
     fetch("/api/todos/" + id, options)
     .then(res => res.json())
     .then(response => {
-        console.log('Success from deleteFetching:', response)
+        //console.log('Success from deleteFetching:', response)
         this.setState({todos: response })
     })
     .catch(error => console.error('Error:', error));

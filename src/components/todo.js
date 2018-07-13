@@ -7,10 +7,11 @@ import React, { Component } from 'react';
 
     saveChange = () => {
         let id = this.props.id;
-        let data = document.getElementById("inputText");
+        let data = document.getElementById(this.props.id);
+       
         //sends id to it's parent (todoContainer) component
         this.props.edit(data.value, id)
-        console.log("data.value, id--->", data.value, id)
+        console.log("data.value-->", data.value, ", id-->", id)
     }
 
     delete = () => {
@@ -19,11 +20,11 @@ import React, { Component } from 'react';
     }
 
     render() {
-        { console.log(this.props.input )}
+        { console.log("this.props.input",this.props.input )}
         return (
             <div className='todo'>
-                <input type='text' id="inputText" defaultValue = { this.props.input } />
-                <button onClick = { this.saveChange }>Edit</button>
+                <input type='text'  defaultValue = { this.props.input } id={this.props.id} />
+                <button onClick = { this.saveChange }>Edit-Save</button>
                 <button onClick = { this.delete }>Delete</button>
             </div>
         )

@@ -8,7 +8,6 @@ import Todo from './todo';
     }
     
     edit = (data, id) => {
-        console.log("edit works in Container")
         //sends id to it's parent App component
         this.props.edit(data, id)
     }

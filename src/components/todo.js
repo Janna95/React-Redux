@@ -4,6 +4,14 @@ import React, { Component } from 'react';
     constructor(props) {
         super(props)
     }
+    // state = {
+    //     input = ""
+    // }
+
+    // handleChange = () => {
+    //     this.setState({ input: event.target.value})
+
+    // }
 
     saveChange = () => {
         let _id = this.props._id;
@@ -23,12 +31,17 @@ import React, { Component } from 'react';
         { console.log("this.props",this.props )}
         return (
             <div className='todo'>
-                <input type='text'  defaultValue = { this.props.input } id={this.props._id} />
-                <button onClick = { this.saveChange }>Edit-Save</button>
-                <button onClick = { this.delete }>Delete</button>
+                <input type='text'  defaultValue = {this.props.input}  id={this.props._id} />
+                <button onClick = {this.saveChange}>Edit-Save</button>
+                <button onClick = {this.delete}>Delete</button>
             </div>
         )
     }
 };
 
 export default ToDo;
+   
+
+
+
+

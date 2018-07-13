@@ -7,7 +7,6 @@ const Schema = mongoose.Schema;
 mongoose.connect("mongodb://localhost:27017/todoDB", { useNewUrlParser: true })
 const db = mongoose.connection;
 
-
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers','Content-Type'  )
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
@@ -26,11 +25,6 @@ db.once("open", function () {
 const todoSchema = new Schema({
     input: String,
 });
-
-// todoSchema.statics.addTodo = function (newTodo) {
-
-//       this.save(newTodo)
-// };
 
 const Todo = mongoose.model("Todo", todoSchema);
 

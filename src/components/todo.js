@@ -6,24 +6,24 @@ import React, { Component } from 'react';
     }
 
     saveChange = () => {
-        let id = this.props.id;
-        let data = document.getElementById(this.props.id);
+        let _id = this.props._id;
+        let data = document.getElementById(this.props._id);
        
         //sends id to it's parent (todoContainer) component
-        this.props.edit(data.value, id)
-        console.log("data.value-->", data.value, ", id-->", id)
+        this.props.edit(data.value, _id)
+        console.log("data.value-->", data.value, ", id-->", _id)
     }
 
     delete = () => {
         //sends id to it's parent (todoContainer) component
-        this.props.delete(this.props.id)
+        this.props.delete(this.props._id)
     }
 
     render() {
-        { console.log("this.props.input",this.props.input )}
+        { console.log("this.props",this.props )}
         return (
             <div className='todo'>
-                <input type='text'  defaultValue = { this.props.input } id={this.props.id} />
+                <input type='text'  defaultValue = { this.props.input } id={this.props._id} />
                 <button onClick = { this.saveChange }>Edit-Save</button>
                 <button onClick = { this.delete }>Delete</button>
             </div>

@@ -8,7 +8,10 @@ class Header extends Component {
 
     add = () => {
         let input = document.getElementById('main-input');
-        this.props.add(input.value)  
+        if (input.value == "") 
+            alert("Todo is empty")
+        else 
+            this.props.add(input.value)   
     }
     
     render() {

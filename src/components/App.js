@@ -11,15 +11,12 @@ class App extends Component {
     fetch('http://localhost:3000/api/todo')
     .then(res => res.json())
     .then(response => {
-        //console.log("from componentDidMount get fetching ", response);
         this.setState({todos: response })
     })
     .catch(error => console.error('Error:', error));
   }
 
   add = (inputText) => {
-    //console.log("received inputText in Parent", inputText)
-
     let options = {
       method: 'POST',
       body: JSON.stringify({input: inputText}),
@@ -28,14 +25,13 @@ class App extends Component {
     fetch('http://localhost:3000/api/todo', options)
     .then(res => res.json())
     .then(response => {
-  
+      console.log("add in App.js -->" ,response )
       this.setState({todos: response })
     })
     .catch(error => console.error('Error:', error));
   }
 
-  edit = (data, id) => {
-    //console.log("edit works in App", data, id)
+  edit = (data, _id) => {
     let options = {
       method: 'PUT',
       body: JSON.stringify({input: data}),
@@ -44,7 +40,7 @@ class App extends Component {
       }
     };
 
-    fetch('/api/todo/' + id, options)
+    fetch('/api/todo/' + _id, options)
     .then(res => res.json())
     .then(response => {
         //console.log('Success from PUT/edit function:', response)
@@ -53,20 +49,21 @@ class App extends Component {
     .catch(error => console.error('Error:', error));
   }
 
-  delete = (id) => {
+  delete = (_id) => {
   
     let options = {
         method: 'DELETE',
-        body: JSON.stringify({id: id}),
+        body: JSON.stringify({_id: _id}),
         headers: {
             "Content-Type": "application/json"
         }
     };
 
-    fetch("/api/todos/" + id, options)
+    fetch("/api/todos/" + _id, options)
     .then(res => res.json())
     .then(response => {
         //console.log('Success from deleteFetching:', response)
+        
         this.setState({todos: response })
     })
     .catch(error => console.error('Error:', error));

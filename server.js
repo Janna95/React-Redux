@@ -1,6 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+mongoose.connect("mongodb://localhost:27017/todoDB", { useNewUrlParser: true })
+const db = mongoose.connection;
 
 
 app.use((req, res, next) => {
@@ -9,30 +14,46 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     next();
 });
-
-
 app.use(bodyParser.json());
 
+/**
+ * database
+ */
 
-let toDoArr = [{input: "initial", id: 127}];
-let id = 0;
+db.once("open", function () {
+    console.log('Connection is OK')
+});
+const todoSchema = new Schema({
+    input: String,
+});
 
+// todoSchema.statics.addTodo = function (newTodo) {
+
+//       this.save(newTodo)
+// };
+
+const Todo = mongoose.model("Todo", todoSchema);
+
+let toDoArr = [];
+//let id = 0;
 
 app.get('/api/todo', (req, res) => {
-
     res.json(toDoArr);
-
 });
 
 app.post('/api/todo', (req, res) => {
-    console.log("req.body--> ", req.body)
-    const newTodo = {
-        input: req.body.input,
-        id: id++
-    };
-    toDoArr.push(newTodo); 
-    console.log("posted",toDoArr);
-    res.json(toDoArr);
+    
+    const newTodo = new Todo({ input: req.body.input });
+
+    newTodo.save(function(err, todo) {
+        if(err) return console.error(err);
+        
+        console.log("todo from database ", todo)
+        toDoArr.push(todo);
+        res.json(toDoArr);
+        console.log(toDoArr);
+
+    })
 });
 
 app.put('/api/todo/:id', (req, res) => {

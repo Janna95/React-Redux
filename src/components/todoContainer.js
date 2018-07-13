@@ -12,17 +12,16 @@ import Todo from './todo';
         this.props.edit(data, id)
     }
 
-    delete = (id) => {
+    delete = (_id) => {
         //sends id to it's parent App component
-        this.props.delete(id)
-        
+        this.props.delete(_id) 
     }
 
     render() {
         return (
             <div>
-                {this.props.todoArr.map((todo) => { 
-                    return <Todo key ={todo.id} input={todo.input} edit ={this.edit} delete={this.delete} id={todo.id}/> 
+                {this.props.todoArr.map((todo, index) => { 
+                    return <Todo key ={todo._id} input={todo.input} edit ={this.edit} delete={this.delete} _id={todo._id}/> 
                     })
                 }
             </div>

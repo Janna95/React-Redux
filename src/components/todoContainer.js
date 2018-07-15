@@ -20,7 +20,7 @@ import Todo from './todo';
     render() {
         return (
             <div>
-                {this.props.todoArr.map((todo, index) => { 
+                {this.props.todoArr.map((todo) => { 
                     return <Todo key ={todo._id} input={todo.input} edit ={this.edit} delete={this.delete} _id={todo._id}/> 
                     })
                 }

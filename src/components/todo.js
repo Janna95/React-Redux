@@ -2,24 +2,24 @@ import React, { Component } from 'react';
 
  class ToDo extends Component {
     constructor(props) {
-        super(props)
+        super(props)  
     }
-    // state = {
-    //     input = ""
-    // }
 
-    // handleChange = () => {
-    //     this.setState({ input: event.target.value})
-
-    // }
-
+    state = { 
+        input: ""
+    }
+    
+    handleChange = (event) => {
+        this.setState({ input: event.target.value });
+        console.log("state in todo-->", this.state)
+    }
+    
     saveChange = () => {
         let _id = this.props._id;
-        let data = document.getElementById(this.props._id);
+        let data = this.state.input;
        
         //sends id to it's parent (todoContainer) component
-        this.props.edit(data.value, _id)
-        console.log("data.value-->", data.value, ", id-->", _id)
+        this.props.edit(data, _id)
     }
 
     delete = () => {
@@ -28,12 +28,11 @@ import React, { Component } from 'react';
     }
 
     render() {
-        { console.log("this.props",this.props )}
         return (
             <div className='todo'>
-                <input type='text'  defaultValue = {this.props.input}  id={this.props._id} />
-                <button onClick = {this.saveChange}>Edit-Save</button>
-                <button onClick = {this.delete}>Delete</button>
+                <input type='text'  defaultValue={this.props.input} onChange={this.handleChange} id={this.props._id} />
+                <button onClick={this.saveChange}>Edit-Save</button>
+                <button onClick={this.delete}>Delete</button>
             </div>
         )
     }

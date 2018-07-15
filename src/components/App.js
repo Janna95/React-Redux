@@ -33,6 +33,7 @@ class App extends Component {
   }
 
   edit = (data, _id) => {
+    console.log("edit in App.js -->" , data, _id )
     let options = {
       method: 'PUT',
       body: JSON.stringify({input: data}),

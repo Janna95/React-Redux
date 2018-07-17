@@ -11,19 +11,16 @@ import React, { Component } from 'react';
     
     handleChange = (event) => {
         this.setState({ input: event.target.value });
-        console.log("state in todo-->", this.state)
     }
     
     saveChange = () => {
         let _id = this.props._id;
         let data = this.state.input;
        
-        //sends id to it's parent (todoContainer) component
         this.props.edit(data, _id)
     }
 
     delete = () => {
-        //sends id to it's parent (todoContainer) component
         this.props.delete(this.props._id)
     }
 

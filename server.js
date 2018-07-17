@@ -12,6 +12,7 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     next();
+    
 });
 app.use(bodyParser.json());
 
@@ -29,7 +30,6 @@ const todoSchema = new Schema({
 const Todo = mongoose.model("Todo", todoSchema);
 
 let toDoArr = [];
-//let id = 0;
 
 app.get('/api/todo', (req, res) => {
     res.json(toDoArr);

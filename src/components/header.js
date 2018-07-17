@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import './styles/header.css';
 
 class Header extends Component {
-    constructor(props) {
-        super(props)
-    }
+
     state = {
         input: ""
     }
@@ -25,7 +23,6 @@ class Header extends Component {
             <div className="header">
                 <h2>My To Do List</h2>
                 <input type="text" id="main-input" value={this.state.input} onChange={this.handleChange}  placeholder="Title..."/>
-
                 <button onClick={this.add} className="addBtn">Add</button>
             </div>
         )

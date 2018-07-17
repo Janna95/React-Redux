@@ -1,84 +1,39 @@
 import React, { Component } from "react";
 import Header from "./header";
 import TodoContainer from './todoContainer'
+import { connect } from 'react-redux';
+import { getTodos, addTodo, editTodo, deleteTodo } from '../actions'
 
-class App extends Component {
-  state = {
-    todos : []
-  }
-
+class WrappedApp extends Component {
+ 
   componentDidMount() {
-    fetch('http://localhost:3000/api/todo')
-    .then(res => res.json())
-    .then(response => {
-        this.setState({todos: response })
-    })
-    .catch(error => console.error('Error:', error));
+    this.props.getTodos();
   }
-
-  add = (inputText) => {
-    let options = {
-      method: 'POST',
-      body: JSON.stringify({input: inputText}),
-      headers: {"Content-Type": "application/json"}
-    };
-    fetch('http://localhost:3000/api/todo', options)
-    .then(res => res.json())
-    .then(response => {
-      console.log("add in App.js -->" ,response )
-      this.setState({todos: response })
-    })
-    
-    .catch(error => console.error('Error:', error));
-  }
-
-  edit = (data, _id) => {
-    console.log("edit in App.js -->" , data, _id )
-    let options = {
-      method: 'PUT',
-      body: JSON.stringify({input: data}),
-      headers: {
-          "Content-Type": "application/json"
-      }
-    };
-
-    fetch('/api/todo/' + _id, options)
-    .then(res => res.json())
-    .then(response => {
-        //console.log('Success from PUT/edit function:', response)
-        this.setState({todos: response })
-    })
-    .catch(error => console.error('Error:', error));
-  }
-
-  delete = (_id) => {
   
-    let options = {
-        method: 'DELETE',
-        body: JSON.stringify({_id: _id}),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    };
-
-    fetch("/api/todos/" + _id, options)
-    .then(res => res.json())
-    .then(response => {
-        //console.log('Success from deleteFetching:', response)
-        
-        this.setState({todos: response })
-    })
-    .catch(error => console.error('Error:', error));
-  }
-
   render() {
     return (
-      <React.Fragment>
-      <Header add = {this.add}/>
-      <TodoContainer todoArr = {this.state.todos} edit = {this.edit} delete = {this.delete}/>
-      </React.Fragment> 
+      <div>
+      <Header add = {this.props.add}/>
+      <TodoContainer todoArr = {this.props.todos} edit = {this.props.edit} delete = {this.props.delete}/>
+      </div>
     );
   }
 };
+
+const mapStateToProps = state => {
+  return {
+    todos: state.todos
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getTodos: () => dispatch(getTodos()),
+    add:  data => dispatch(addTodo(data)),
+    edit: (data, _id) => dispatch(editTodo(data, _id)),
+    delete: _id => dispatch(deleteTodo(_id))
+}
+}
+const App = connect(mapStateToProps, mapDispatchToProps)(WrappedApp);
 
 export default App;

@@ -51,24 +51,20 @@ export function editTodo(data, _id) {
             "Content-Type": "application/json"
         }
       };
-  
       fetch('/api/todo/' + _id, options)
       .then(res => res.json())
-      .then(response => {
-        // console.log('Success from PUT/edit function:', response)
-        // console.log(data, "data")
-        dispatch(editTodoSuccess(response, data, _id))
+      .then(_id => {
+        dispatch(editTodoSuccess(data, _id))
       })
       .catch(error => console.error('Error:', error));
    } 
 };
 
-function editTodoSuccess(response, data, _id) {
+function editTodoSuccess(data, _id) {
     return {
         type: 'EDIT_TODO_SUCCESS',
-        _id: _id,
-        data: data,
-        todos: response
+        data,
+        _id
     }
 }
 
@@ -85,9 +81,9 @@ export function deleteTodo(_id) {
     
         fetch("/api/todos/" + _id, options)
         .then(res => res.json())
-        .then(response => {
-            console.log( response, '<-Success from deleteFetching')
-            dispatch(deleteTodoSuccess(_id, response))
+        .then(_id => {
+           // console.log( response, '<-Success from deleteFetching')
+            dispatch(deleteTodoSuccess(_id))
         })
         .catch(error => console.error('Error:', error));
     }
@@ -97,7 +93,7 @@ function deleteTodoSuccess(_id, response) {
     console.log(_id, "del _id in action")
     return {
         type: "DELETE_TODO_SUCCESS",
-        _id: _id,
+        _id,
         todos: response
     }
 }
